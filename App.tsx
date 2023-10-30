@@ -25,6 +25,24 @@ const cars = [
     price: '45.99$',
     rating: 4,
   },
+  {
+  images: [require('./assets/flyttecar1.jpg'), require('./assets/flyttecar2.jpg')],
+      name: 'Renault Master',
+      fuel: 'Diesel',
+      transmission: 'Manual',
+      seats: 3,
+      price: '109.99$',
+      rating: 5,
+  },
+  {
+  images: [require('./assets/varevognscar1.jpg'), require('./assets/varevognscar2.jpg')],
+      name: 'Peugot Boxer',
+      fuel: 'Diesel',
+      transmission: 'Manual',
+      seats: 3,
+      price: '59.99$',
+      rating: 3,
+  }
 ];
 
 
