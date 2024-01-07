@@ -1,8 +1,8 @@
 // App.tsx
 
-import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, Button } from 'react-native';
-import {useNavigation} from "@react-navigation/native";
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, View, Text, TouchableOpacity, Image, ScrollView, Button } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 
 export default function FamilyScreen({}) {

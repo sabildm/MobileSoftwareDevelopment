@@ -1,12 +1,37 @@
 // App.tsx
 
-import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, Button } from 'react-native';
-import {useNavigation} from "@react-navigation/native";
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, View, Text, TouchableOpacity, Image, ScrollView, Button } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 
 export default function HomeScreen({}) {
     const navigation = useNavigation();
+    const [cars, setCars] = useState([]);
+
+    useEffect(() => {
+            fetch("https://api.api-ninjas.com/v1/cars?limit=10&fuel_type=gas", {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Api-Key': 'opiBgEzKruOUmAdTnnATew==g8fBYuUqinWqUGEZ' // Replace with your actual API key if needed
+                }
+            })
+            .then(response => response.json())
+                    .then(data => {
+                        console.log(data); // Log the data to see its structure
+                        if (Array.isArray(data)) { // Check if data is an array
+                            setCars(data);
+                        } else {
+                            // Handle cases where data is not an array
+                            console.error('Data is not an array:', data);
+                        }
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+                }, []);
+
     return (
         <View style={styles.container}>
             <Text style={styles.header}>RentRide</Text>
@@ -28,45 +53,32 @@ export default function HomeScreen({}) {
                 </TouchableOpacity>
             </View>
 
-            <Car
-                imageSrc={('/MobileSoftwareDevelopment/assets/mercedes.jpg')}
-                name="Mercedes C63"
-                fuel="Gas"
-                transmission="Manual"
-                seats={5}
-                price="55.99$"
-            />
-            <Car
-                imageSrc={('/MobileSoftwareDevelopment/assets/vwpolo.jpg')}
-                name="VW Polo Aut."
-                fuel="Gas"
-                transmission="Automatic"
-                seats={5}
-                price="45.99$"
-            />
+            <ScrollView>
+                                        {cars.map((car, index) => (
+                                            <Car
+                                                key={index}
+                                                name={car.make + " " + car.model} // Assuming 'make' and 'model' fields are available
+                                                fuel={car.fuel_type}
+                                                transmission={car.transmission}
+
+
+                                                // Add other props as needed
+                                            />
+                                        ))}
+                        </ScrollView>
         </View>
     );
 }
 
-const Car: React.FC<{
-    imageSrc: any;
-    name: string;
-    fuel: string;
-    transmission: string;
-    seats: number;
-    price: string;
-}> = ({ imageSrc, name, fuel, transmission, seats, price }) => {
+const Car = ({ name, fuel, transmission, seats, price }) => {
     return (
         <View style={styles.carContainer}>
-            <Image source={imageSrc} style={styles.carImage} />
+            {/* Display car details. Example: */}
             <Text>{name}</Text>
             <Text>Fuel: {fuel}</Text>
             <Text>Transmission: {transmission}</Text>
-            <Text>Seats: {seats}</Text>
-            <Text>{price} / day</Text>
-            <TouchableOpacity style={styles.moreInfoButton}>
-                <Text>More info</Text>
-            </TouchableOpacity>
+
+            {/* Add more details as needed */}
         </View>
     );
 };
