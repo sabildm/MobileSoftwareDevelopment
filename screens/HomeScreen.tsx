@@ -14,7 +14,7 @@ export default function HomeScreen({}) {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-Api-Key': 'opiBgEzKruOUmAdTnnATew==g8fBYuUqinWqUGEZ' // Replace with your actual API key if needed
+                    'X-Api-Key': 'opiBgEzKruOUmAdTnnATew==g8fBYuUqinWqUGEZ'
                 }
             })
             .then(response => response.json())
@@ -57,12 +57,10 @@ export default function HomeScreen({}) {
                                         {cars.map((car, index) => (
                                             <Car
                                                 key={index}
-                                                name={car.make + " " + car.model} // Assuming 'make' and 'model' fields are available
+                                                name={car.make + " " + car.model}
                                                 fuel={car.fuel_type}
                                                 transmission={car.transmission}
 
-
-                                                // Add other props as needed
                                             />
                                         ))}
                         </ScrollView>
@@ -73,12 +71,12 @@ export default function HomeScreen({}) {
 const Car = ({ name, fuel, transmission, seats, price }) => {
     return (
         <View style={styles.carContainer}>
-            {/* Display car details. Example: */}
+            {}
             <Text>{name}</Text>
             <Text>Fuel: {fuel}</Text>
             <Text>Transmission: {transmission}</Text>
 
-            {/* Add more details as needed */}
+            {}
         </View>
     );
 };
